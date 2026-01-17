@@ -1,5 +1,8 @@
 import { PersephoneError } from './base.error';
 
+/**
+ * Error during migration execution
+ */
 export class MigrationError extends PersephoneError {
   readonly key: string;
   readonly fromVersion: number;
@@ -7,7 +10,7 @@ export class MigrationError extends PersephoneError {
 
   constructor(message: string, key: string, fromVersion: number, toVersion: number, cause?: unknown) {
     super(
-      `migration failed for key "${key}" from version ${fromVersion} to ${toVersion}: ${message}`,
+      `Migration failed for key "${key}" from version ${fromVersion} to ${toVersion}: ${message}`,
       'MIGRATION_ERROR',
       cause
     );
@@ -16,4 +19,3 @@ export class MigrationError extends PersephoneError {
     this.toVersion = toVersion;
   }
 }
-

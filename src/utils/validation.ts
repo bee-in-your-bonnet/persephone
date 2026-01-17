@@ -2,6 +2,15 @@ import type { Validator } from '../types/validation';
 import { ValidationError } from '../errors/validation.error';
 import { isStandardValidator } from '../types/validation';
 
+/**
+ * Validate data using standard schema (Zod, Yup, etc.)
+ * 
+ * @param data - Data to validate
+ * @param validator - Standard validator (must implement StandardValidator interface)
+ * @param key - Key for error message
+ * @returns Validated data
+ * @throws ValidationError if data is invalid
+ */
 export function validate<T>(
   data: unknown,
   validator: Validator<T>,
@@ -27,6 +36,13 @@ export function validate<T>(
   }
 }
 
+/**
+ * Safely validate data without throwing errors
+ * 
+ * @param data - Data to validate
+ * @param validator - Standard validator
+ * @returns Validation result with success flag
+ */
 export function safeValidate<T>(
   data: unknown,
   validator: Validator<T>
@@ -40,4 +56,3 @@ export function safeValidate<T>(
 
   return validator.safeParse(data);
 }
-

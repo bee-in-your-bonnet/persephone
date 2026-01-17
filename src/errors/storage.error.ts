@@ -1,5 +1,8 @@
 import { PersephoneError } from './base.error';
 
+/**
+ * Storage operation error
+ */
 export class StorageError extends PersephoneError {
   readonly key?: string;
   readonly operation?: string;
@@ -14,4 +17,3 @@ export class StorageError extends PersephoneError {
     this.operation = operation;
   }
 }
-

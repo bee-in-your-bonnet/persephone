@@ -1,5 +1,8 @@
 import { PersephoneError } from './base.error';
 
+/**
+ * Data validation error
+ */
 export class ValidationError extends PersephoneError {
   readonly key: string;
   readonly data: unknown;
@@ -14,4 +17,3 @@ export class ValidationError extends PersephoneError {
     this.data = data;
   }
 }
-

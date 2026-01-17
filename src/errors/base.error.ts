@@ -1,3 +1,6 @@
+/**
+ * Base class for all library errors
+ */
 export class PersephoneError extends Error {
   readonly code?: string;
   readonly cause?: unknown;
@@ -7,9 +10,9 @@ export class PersephoneError extends Error {
     this.name = this.constructor.name;
     this.code = code;
     
+    // Support Error.cause (ES2022)
     if (cause) {
       this.cause = cause;
     }
   }
 }
-

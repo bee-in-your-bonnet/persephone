@@ -1,4 +1,4 @@
-import type { Schemas } from '../types';
+import type { Schemas } from '../types/schema';
 import type { Persephone } from './persephone';
 
 export class VersionBuilder {
