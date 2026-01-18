@@ -4,6 +4,7 @@ import { VersionBuilder } from './version-builder';
 import { MemoryAdapter } from '../adapters/memory/memory.adapter';
 import { LocalStorageAdapter } from '../adapters/browser/local-storage.adapter';
 import { SessionStorageAdapter } from '../adapters/browser/session-storage.adapter';
+import { CookieAdapter } from '../adapters/browser/cookie.adapter';
 import { deserialize, serialize } from '../utils/serialization';
 import { validate } from '../utils/validation';
 import { setStoredVersion, getVersionKey, isVersionKey } from '../utils/migrations';
@@ -72,6 +73,17 @@ export class Persephone {
 
   useSessionStorage(): this {
     this._adapter = new SessionStorageAdapter();
+    return this;
+  }
+
+  useCookies(options?: {
+    path?: string;
+    domain?: string;
+    secure?: boolean;
+    sameSite?: 'strict' | 'lax' | 'none';
+    maxAge?: number;
+  }): this {
+    this._adapter = new CookieAdapter(options);
     return this;
   }
 
