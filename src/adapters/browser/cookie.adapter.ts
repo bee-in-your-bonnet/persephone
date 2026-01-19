@@ -23,7 +23,7 @@ export class CookieAdapter implements IStorage {
     };
   }
 
-  private getCookies(): Record<string, string> {
+  private getCookies = (): Record<string, string> => {
     if (typeof document === 'undefined') {
       throw new StorageError('document is not available in this environment');
     }
@@ -38,9 +38,9 @@ export class CookieAdapter implements IStorage {
       });
     }
     return cookies;
-  }
+  };
 
-  private setCookie(
+  private setCookie = (
     name: string,
     value: string,
     options?: {
@@ -51,7 +51,7 @@ export class CookieAdapter implements IStorage {
       sameSite?: 'strict' | 'lax' | 'none';
       maxAge?: number;
     }
-  ): void {
+  ): void => {
     if (typeof document === 'undefined') {
       throw new StorageError('document is not available in this environment');
     }
@@ -85,9 +85,9 @@ export class CookieAdapter implements IStorage {
     }
 
     document.cookie = cookieString;
-  }
+  };
 
-  async getItem(key: string): Promise<string | null> {
+  getItem = async (key: string): Promise<string | null> => {
     try {
       const cookies = this.getCookies();
       return cookies[key] ?? null;
@@ -99,9 +99,9 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async setItem(key: string, value: string): Promise<void> {
+  setItem = async (key: string, value: string): Promise<void> => {
     try {
       const expires = new Date();
       expires.setFullYear(expires.getFullYear() + 1);
@@ -114,9 +114,9 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async removeItem(key: string): Promise<void> {
+  removeItem = async (key: string): Promise<void> => {
     try {
       const expires = new Date(0);
       this.setCookie(key, '', { expires });
@@ -128,9 +128,9 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async clear(): Promise<void> {
+  clear = async (): Promise<void> => {
     try {
       const cookies = this.getCookies();
       const expires = new Date(0);
@@ -145,9 +145,9 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async keys(): Promise<string[]> {
+  keys = async (): Promise<string[]> => {
     try {
       const cookies = this.getCookies();
       return Object.keys(cookies);
@@ -159,9 +159,9 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async length(): Promise<number> {
+  length = async (): Promise<number> => {
     try {
       const cookies = this.getCookies();
       return Object.keys(cookies).length;
@@ -173,5 +173,5 @@ export class CookieAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 }

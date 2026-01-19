@@ -14,9 +14,9 @@ export class VersionBuilder {
     return this._version;
   }
 
-  schema(schemas: Schemas): Persephone {
+  schema = (schemas: Schemas): Persephone => {
     this.persephone._setSchemas(schemas);
     return this.persephone;
-  }
+  };
 }
 

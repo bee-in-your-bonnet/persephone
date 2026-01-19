@@ -10,7 +10,6 @@ export class PersephoneError extends Error {
     this.name = this.constructor.name;
     this.code = code;
     
-    // Support Error.cause (ES2022)
     if (cause) {
       this.cause = cause;
     }

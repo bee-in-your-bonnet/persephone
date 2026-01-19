@@ -37,16 +37,16 @@ export class Persephone {
     return this._version;
   }
 
-  version(version: number): VersionBuilder {
+  version = (version: number): VersionBuilder => {
     this._version = version;
     return new VersionBuilder(this, version);
-  }
+  };
 
-  _setSchemas(schemas: Schemas): void {
+  _setSchemas = (schemas: Schemas): void => {
     this._schemas = schemas;
-  }
+  };
 
-  async open(): Promise<void> {
+  open = async (): Promise<void> => {
     if (!this._adapter) {
       throw new Error('Adapter is not set. Call useMemory(), useLocalStorage() or use() first.');
     }
@@ -60,46 +60,46 @@ export class Persephone {
     }
 
     this._initialized = true;
-  }
+  };
 
   get isOpen(): boolean {
     return this._initialized;
   }
 
-  useLocalStorage(): this {
+  useLocalStorage = (): this => {
     this._adapter = new LocalStorageAdapter();
     return this;
-  }
+  };
 
-  useSessionStorage(): this {
+  useSessionStorage = (): this => {
     this._adapter = new SessionStorageAdapter();
     return this;
-  }
+  };
 
-  useCookies(options?: {
+  useCookies = (options?: {
     path?: string;
     domain?: string;
     secure?: boolean;
     sameSite?: 'strict' | 'lax' | 'none';
     maxAge?: number;
-  }): this {
+  }): this => {
     this._adapter = new CookieAdapter(options);
     return this;
-  }
+  };
 
-  useMemory(): this {
+  useMemory = (): this => {
     this._adapter = new MemoryAdapter();
     return this;
-  }
+  };
 
-  use(adapter: IStorage): this {
+  use = (adapter: IStorage): this => {
     this._adapter = adapter;
     return this;
-  }
+  };
 
   get<T>(key: string): Promise<T | null>;
   get<T>(key: string, callback: (err: Error | null, value: T | null) => void): void;
-  get<T>(key: string, callback?: (err: Error | null, value: T | null) => void): Promise<T | null> | void {
+  get = <T>(key: string, callback?: (err: Error | null, value: T | null) => void): Promise<T | null> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -152,11 +152,11 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 
   set<T>(key: string, value: T): Promise<void>;
   set<T>(key: string, value: T, callback: (err: Error | null) => void): void;
-  set<T>(key: string, value: T, callback?: (err: Error | null) => void): Promise<void> | void {
+  set = <T>(key: string, value: T, callback?: (err: Error | null) => void): Promise<void> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -206,11 +206,11 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 
   remove(key: string): Promise<void>;
   remove(key: string, callback: (err: Error | null) => void): void;
-  remove(key: string, callback?: (err: Error | null) => void): Promise<void> | void {
+  remove = (key: string, callback?: (err: Error | null) => void): Promise<void> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -243,11 +243,11 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 
   clear(): Promise<void>;
   clear(callback: (err: Error | null) => void): void;
-  clear(callback?: (err: Error | null) => void): Promise<void> | void {
+  clear = (callback?: (err: Error | null) => void): Promise<void> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -278,11 +278,11 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 
   keys(): Promise<string[]>;
   keys(callback: (err: Error | null, keys: string[]) => void): void;
-  keys(callback?: (err: Error | null, keys: string[]) => void): Promise<string[]> | void {
+  keys = (callback?: (err: Error | null, keys: string[]) => void): Promise<string[]> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -314,11 +314,11 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 
   length(): Promise<number>;
   length(callback: (err: Error | null, length: number) => void): void;
-  length(callback?: (err: Error | null, length: number) => void): Promise<number> | void {
+  length = (callback?: (err: Error | null, length: number) => void): Promise<number> | void => {
     if (!this._adapter) {
       const error = new Error('Adapter is not set');
       if (callback) {
@@ -351,5 +351,5 @@ export class Persephone {
     }
 
     return promise;
-  }
+  };
 }

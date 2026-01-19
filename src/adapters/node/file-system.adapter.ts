@@ -18,15 +18,15 @@ export class FileSystemAdapter implements IStorage {
     this.basePath = basePath;
   }
 
-  private getFilePath(key: string): string {
+  private getFilePath = (key: string): string => {
     if (!path) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
     const safeKey = key.replace(/[^a-zA-Z0-9_-]/g, '_');
     return path.join(this.basePath, `${safeKey}.json`);
-  }
+  };
 
-  private async ensureDirectory(): Promise<void> {
+  private ensureDirectory = async (): Promise<void> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -38,9 +38,9 @@ export class FileSystemAdapter implements IStorage {
         throw error;
       }
     }
-  }
+  };
 
-  async getItem(key: string): Promise<string | null> {
+  getItem = async (key: string): Promise<string | null> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -65,9 +65,9 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async setItem(key: string, value: string): Promise<void> {
+  setItem = async (key: string, value: string): Promise<void> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -83,9 +83,9 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async removeItem(key: string): Promise<void> {
+  removeItem = async (key: string): Promise<void> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -107,9 +107,9 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async clear(): Promise<void> {
+  clear = async (): Promise<void> => {
     if (!fs || !path) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -128,9 +128,9 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async keys(): Promise<string[]> {
+  keys = async (): Promise<string[]> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -147,9 +147,9 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async length(): Promise<number> {
+  length = async (): Promise<number> => {
     if (!fs) {
       throw new StorageError('FileSystem adapter requires Node.js environment');
     }
@@ -166,5 +166,5 @@ export class FileSystemAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 }

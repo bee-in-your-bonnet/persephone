@@ -17,7 +17,7 @@ export class RedisAdapter implements IStorage {
     this.client = client;
   }
 
-  async getItem(key: string): Promise<string | null> {
+  getItem = async (key: string): Promise<string | null> => {
     try {
       return await this.client.get(key);
     } catch (error) {
@@ -28,9 +28,9 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async setItem(key: string, value: string): Promise<void> {
+  setItem = async (key: string, value: string): Promise<void> => {
     try {
       await this.client.set(key, value);
     } catch (error) {
@@ -41,9 +41,9 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async removeItem(key: string): Promise<void> {
+  removeItem = async (key: string): Promise<void> => {
     try {
       await this.client.del(key);
     } catch (error) {
@@ -54,9 +54,9 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async clear(): Promise<void> {
+  clear = async (): Promise<void> => {
     try {
       await this.client.flushdb();
     } catch (error) {
@@ -67,9 +67,9 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async keys(): Promise<string[]> {
+  keys = async (): Promise<string[]> => {
     try {
       return await this.client.keys('*');
     } catch (error) {
@@ -80,9 +80,9 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 
-  async length(): Promise<number> {
+  length = async (): Promise<number> => {
     try {
       return await this.client.dbsize();
     } catch (error) {
@@ -93,5 +93,5 @@ export class RedisAdapter implements IStorage {
         error
       );
     }
-  }
+  };
 }
